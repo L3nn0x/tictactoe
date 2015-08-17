@@ -8,12 +8,12 @@
 
 class	LSprite {
 	public:
-		LSprite(std::shared_ptr<LTexture*> tex, int x, int y);
+		LSprite(std::shared_ptr<LTexture> tex, int x, int y);
 
 		void	render();
 
 	protected:
-		std::shared_ptr<LTexture*>	mTex;
+		std::shared_ptr<LTexture>	mTex;
 		int	mX;
 		int	mY;
 };

@@ -3,16 +3,15 @@
 #include "ltexture.h"
 #include "lsprite.h"
 #include "lwindow.h"
-#include <vector>
 #include <memory>
+#include <vector>
 
 int main() {
 	SDL_Init(SDL_INIT_VIDEO);
 	LWindow	window("Tic tac toe", 640, 480);
 
 	std::vector<LSprite*>	texts;
-	std::shared_ptr<LTexture*>	tex = std::make_shared<LTexture*>
-		(new LTexture(window.getRenderer(), "res/cross.bmp"));
+	std::shared_ptr<LTexture>	tex(new LTexture(window.getRenderer(), "res/cross.bmp"));
 
 	bool	quit =false;
 	while (!quit) {

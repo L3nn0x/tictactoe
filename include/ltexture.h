@@ -9,6 +9,7 @@
 class	LTexture {
 	public:
 		LTexture(SDL_Renderer*, std::string path);
+		LTexture(LTexture&) = delete;
 		~LTexture();
 
 		void	setColor(uint8_t red, uint8_t green, uint8_t blue);
