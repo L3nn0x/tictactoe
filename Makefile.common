@@ -1,0 +1,24 @@
+TOP := $(dir $(lastword $(MAKEFILE_LIST)))
+SRC_DIR := $(TOP)src/
+INCLUDE_DIR := $(TOP)include/
+BIN_DIR := $(TOP)bin/
+OBJ_DIR := $(TOP)obj/
+LIB_DIR := $(TOP)lib/
+DEPENDS_DIR := $(TOP)depends/
+
+CC := g++
+CFLAGS := -c -Wall -Werror -std=c++11
+DEBUG ?= yes
+ifeq ($(DEBUG), yes)
+	CFLAGS += -g
+else
+	CFLAGS += -O2
+endif
+CPPFLAGS := -I$(INCLUDE_DIR)
+LDFLAGS := -L$(LIB_DIR) None
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
+	$(CC) $(CPPFLAGS) $(CFLAGS) $< -o $@
+
+$(DEPENDS_DIR)%.d: $(SRC_DIR)%.cpp
+	$(CC) $(CPPFLAGS) $(CFLAGS) -MM $(<:$(SRC_DIR).cpp=.o) $^ > $@
