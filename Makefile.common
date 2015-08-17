@@ -15,7 +15,7 @@ else
 	CFLAGS += -O2
 endif
 CPPFLAGS := -I$(INCLUDE_DIR)
-LDFLAGS := -L$(LIB_DIR) None
+LDFLAGS := -L$(LIB_DIR) -lSDL2
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
 	$(CC) $(CPPFLAGS) $(CFLAGS) $< -o $@
