@@ -26,14 +26,14 @@ class	LWindow {
 		void	setFullScreen(bool fullscreen);
 
 	protected:
-		SDL_Window		*mWindow;
-		SDL_Renderer	*mRenderer;
-		bool	mMouseFocus;
-		bool	mKeyboardFocus;
-		bool	mFullScreen;
-		bool	mMinimized;
-		int		mWindowID;
-		bool	mShown;
+		SDL_Window			*mWindow;
+		SDL_Renderer		*mRenderer;
+		bool				mMouseFocus;
+		bool				mKeyboardFocus;
+		bool				mFullScreen;
+		bool				mMinimized;
+		unsigned int		mWindowID;
+		bool				mShown;
 };
 
 #endif /* !_LWINDOW_H_ */
