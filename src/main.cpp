@@ -1,21 +1,16 @@
 #include <iostream>
-#include <SDL2/SDL.h>
 #include <string>
-
-SDL_Surface	*loadSurface(std::string path) {
-	SDL_Surface	*tmp = SDL_LoadBMP(std::string(std::string(SDL_GetBasePath()) + path).c_str());
-	if (!tmp)
-		std::cout << "Unable to load image " << path << ", error : " << SDL_GetError() << std::endl;
-	return tmp;
-}
+#include "ltexture.h"
 
 int main() {
 	SDL_Init(SDL_INIT_VIDEO);
-	SDL_Surface	*surface = loadSurface("res/sprite.bmp");
 	SDL_Window	*window = SDL_CreateWindow("Tic tac toe", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			640, 480, 0);
-	SDL_Surface	*screen = SDL_GetWindowSurface(window);
-	SDL_FillRect(screen, nullptr, SDL_MapRGB(screen->format, 255, 255, 255));
+
+	SDL_Renderer	*ren = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
+	LTexture	tex(ren, "res/cross.bmp");
+
 	bool	quit =false;
 	while (!quit) {
 		SDL_Event	e;
@@ -25,10 +20,13 @@ int main() {
 			else if (e.type == SDL_KEYDOWN)
 				quit = true;
 		}
-		SDL_Rect	tmp = {0, 0, 640, 480};
-		SDL_BlitScaled(surface, nullptr, screen, &tmp);
-		SDL_UpdateWindowSurface(window);
+		SDL_SetRenderDrawColor(ren, 0xFF, 0xFF, 0xFF, 0xFF);
+		SDL_RenderClear(ren);
+		tex.render(0, 0);
+		SDL_RenderPresent(ren);
 	}
+	SDL_DestroyRenderer(ren);
+	SDL_DestroyWindow(window);
 	SDL_Quit();
     return 0;
 }
