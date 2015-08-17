@@ -1,32 +1,16 @@
 #include <iostream>
 #include <string>
 #include "ltexture.h"
+#include "lsprite.h"
 #include "lwindow.h"
 #include <vector>
 #include <memory>
-
-class	Sprite {
-	public:
-		Sprite(std::shared_ptr<LTexture*> tex, int x, int y) {
-			mX = x;
-			mY = y;
-			mTex = tex;
-		}
-
-		void	render() {
-			(*mTex)->render(mX, mY);
-		}
-	protected:
-		std::shared_ptr<LTexture*>	mTex;
-		int	mX;
-		int	mY;
-};
 
 int main() {
 	SDL_Init(SDL_INIT_VIDEO);
 	LWindow	window("Tic tac toe", 640, 480);
 
-	std::vector<Sprite*>	texts;
+	std::vector<LSprite*>	texts;
 	std::shared_ptr<LTexture*>	tex = std::make_shared<LTexture*>
 		(new LTexture(window.getRenderer(), "res/cross.bmp"));
 
@@ -41,7 +25,7 @@ int main() {
 			else if (e.type == SDL_MOUSEBUTTONDOWN) {
 				int x, y;
 				SDL_GetMouseState(&x, &y);
-				texts.push_back(new Sprite(tex, x, y));
+				texts.push_back(new LSprite(tex, x, y));
 			}
 			window.handleEvent(e);
 		}

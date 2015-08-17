@@ -8,7 +8,7 @@ SDL_Surface	*loadSurface(std::string path) {
 }
 
 LTexture::LTexture(SDL_Renderer *ren, std::string path) : mRen(ren), mTexture(nullptr),
-	mFlip(SDL_FLIP_NONE), w(0), h(0), angle(0.f), center(nullptr) {
+	w(0), h(0) {
 	SDL_Surface	*tmp = loadSurface(path);
 	if (!tmp)
 		throw;
@@ -30,17 +30,14 @@ LTexture::~LTexture() {
 	}
 }
 
-void	LTexture::setFlip(SDL_RendererFlip flip) {
-	mFlip = flip;
-}
-
-void	LTexture::render(int x, int y, SDL_Rect *clip) {
+void	LTexture::render(int x, int y, SDL_Rect *clip, double angle,
+		SDL_Point *center, SDL_RendererFlip flip) {
 	SDL_Rect	tmp = {x, y, w, h};
 	if (clip) {
 		tmp.w = clip->w;
 		tmp.h = clip->h;
 	}
-	SDL_RenderCopyEx(mRen, mTexture, clip, &tmp, angle, center, mFlip);
+	SDL_RenderCopyEx(mRen, mTexture, clip, &tmp, angle, center, flip);
 }
 
 void	LTexture::setColor(uint8_t red, uint8_t green, uint8_t blue) {
