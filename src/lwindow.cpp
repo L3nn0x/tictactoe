@@ -17,8 +17,11 @@ LWindow::LWindow(std::string name, int w, int h) : w(w), h(h), mWindow(nullptr),
 		SDL_DestroyWindow(mWindow);
 		throw;
 	}
+	SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0XFF);
+	mWindowID = SDL_GetWindowID(mWindow);
 	mMouseFocus = true;
 	mKeyboardFocus = true;
+	mShown = true;
 }
 
 LWindow::~LWindow() {
@@ -33,9 +36,15 @@ SDL_Renderer	*LWindow::getRenderer() {
 }
 
 void	LWindow::handleEvent(SDL_Event &e) {
-	if (e.type != SDL_WINDOWEVENT)
+	if (e.type != SDL_WINDOWEVENT || e.window.windowID != mWindowID)
 		return;
 	switch (e.window.event) {
+		case	SDL_WINDOWEVENT_SHOWN:
+			mShown = true;
+			break;
+		case	SDL_WINDOWEVENT_HIDDEN:
+			mShown = false;
+			break;
 		case	SDL_WINDOWEVENT_SIZE_CHANGED:
 			w = e.window.data1;
 			h = e.window.data2;
@@ -65,7 +74,23 @@ void	LWindow::handleEvent(SDL_Event &e) {
 		case	SDL_WINDOWEVENT_RESTORED:
 			mMinimized = false;
 			break;
+		case	SDL_WINDOWEVENT_CLOSE:
+			SDL_HideWindow(mWindow);
 	}
+}
+
+void	LWindow::focus() {
+	if (!mShown)
+		SDL_ShowWindow(mWindow);
+	SDL_RaiseWindow(mWindow);
+}
+
+void	LWindow::render() {
+	if (mMinimized || !mShown)
+		return;
+	SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_RenderClear(mRenderer);
+	SDL_RenderPresent(mRenderer);
 }
 
 void	LWindow::setFullScreen(bool fullscreen) {

@@ -13,6 +13,8 @@ class	LWindow {
 		SDL_Renderer	*getRenderer();
 
 		void	handleEvent(SDL_Event &e);
+		void	focus();
+		void	render();
 
 		int	w;
 		int	h;
@@ -30,6 +32,8 @@ class	LWindow {
 		bool	mKeyboardFocus;
 		bool	mFullScreen;
 		bool	mMinimized;
+		int		mWindowID;
+		bool	mShown;
 };
 
 #endif /* !_LWINDOW_H_ */
