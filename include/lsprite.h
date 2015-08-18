@@ -12,10 +12,16 @@ class	LSprite {
 
 		void	render();
 
+		void	setCenter(SDL_Point);
+
+		int	w;
+		int	h;
+
 	protected:
 		std::shared_ptr<LTexture>	mTex;
-		int	mX;
-		int	mY;
+		int			mX;
+		int			mY;
+		SDL_Point	mCenter;
 };
 
 #endif /* !_LSPRITE_H_ */
