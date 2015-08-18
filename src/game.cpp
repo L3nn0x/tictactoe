@@ -39,8 +39,8 @@ void	Game::processEvents() {
 			if (x < 3 && y < 3 && !data[x][y]) {
 				auto	tmp = std::unique_ptr<LSprite>(
 						new LSprite(turn?circle:cross,
-							x * mWindow->w + mWindow->w / 2,
-							y * mWindow->h + mWindow->h / 2));
+							x * mWindow->w / 3 + mWindow->w / 6,
+							y * mWindow->h / 3 + mWindow->h / 6));
 				tmp->setCenter({tmp->w / 2, tmp->h / 2});
 				sprites.push_back(std::move(tmp));
 				data[x][y] = turn?1:2;

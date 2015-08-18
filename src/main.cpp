@@ -4,7 +4,7 @@
 int main() {
 	SDL_Init(SDL_INIT_VIDEO);
 
-	Game	app();
+	Game	app;
 
 	app.run();
 
