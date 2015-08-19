@@ -4,13 +4,15 @@
 
 #include <SDL2/SDL.h>
 #include <string>
+#include "ltexturemanager.h"
 
 class	LWindow {
 	public:
 		LWindow(std::string name, int w, int h);
 		~LWindow();
 
-		SDL_Renderer	*getRenderer();
+		SDL_Renderer		*getRenderer();
+		LTextureManager&	getManager();
 
 		void	handleEvent(SDL_Event &e);
 		void	focus();
@@ -34,6 +36,7 @@ class	LWindow {
 		bool				mMinimized;
 		unsigned int		mWindowID;
 		bool				mShown;
+		std::unique_ptr<LTextureManager>	mManager;
 };
 
 #endif /* !_LWINDOW_H_ */

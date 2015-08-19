@@ -2,13 +2,12 @@
 #ifndef _LSPRITE_H_
 # define _LSPRITE_H_
 
-#include <memory>
 #include "ltexture.h"
 #include <SDL2/SDL.h>
 
 class	LSprite {
 	public:
-		LSprite(std::shared_ptr<LTexture> tex, int x, int y);
+		LSprite(LTexture& tex, int x, int y);
 
 		void	render();
 
@@ -18,7 +17,7 @@ class	LSprite {
 		int	h;
 
 	protected:
-		std::shared_ptr<LTexture>	mTex;
+		LTexture&	mTex;
 		int			mX;
 		int			mY;
 		SDL_Point	mCenter;

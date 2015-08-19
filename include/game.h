@@ -24,8 +24,6 @@ class	Game {
 		bool									quit;
 		int										data[3][3];
 		std::vector<std::unique_ptr<LSprite>>	sprites;
-		std::shared_ptr<LTexture>				cross;
-		std::shared_ptr<LTexture>				circle;
 		bool									turn;
 };
 

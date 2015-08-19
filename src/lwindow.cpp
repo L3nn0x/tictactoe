@@ -22,6 +22,7 @@ LWindow::LWindow(std::string name, int w, int h) : w(w), h(h), mWindow(nullptr),
 	mMouseFocus = true;
 	mKeyboardFocus = true;
 	mShown = true;
+	mManager = std::unique_ptr<LTextureManager>(new LTextureManager(mRenderer));
 }
 
 LWindow::~LWindow() {
@@ -33,6 +34,10 @@ LWindow::~LWindow() {
 
 SDL_Renderer	*LWindow::getRenderer() {
 	return mRenderer;
+}
+
+LTextureManager&	LWindow::getManager() {
+	return *mManager;
 }
 
 void	LWindow::handleEvent(SDL_Event &e) {
