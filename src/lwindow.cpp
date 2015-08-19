@@ -36,8 +36,12 @@ SDL_Renderer	*LWindow::getRenderer() {
 	return mRenderer;
 }
 
-LTextureManager&	LWindow::getManager() {
-	return *mManager;
+void	LWindow::load(std::string id, std::string filename) {
+	mManager->load(id, filename);
+}
+
+LTexture*	LWindow::get(std::string id) {
+	return mManager->get(id);
 }
 
 void	LWindow::handleEvent(SDL_Event &e) {

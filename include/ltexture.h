@@ -9,6 +9,7 @@
 class	LTexture {
 	public:
 		LTexture(SDL_Renderer*, std::string path);
+		LTexture(LTexture*) = delete;
 		LTexture(LTexture&) = delete;
 		~LTexture();
 
@@ -20,8 +21,8 @@ class	LTexture {
 		void	setAlpha(uint8_t alpha);
 
 	protected:
-		SDL_Renderer		*mRen;
-		SDL_Texture			*mTexture;
+		SDL_Renderer	*mRen;
+		SDL_Texture		*mTexture;
 
 	public:
 		int			w;

@@ -3,9 +3,8 @@
 #include <iostream>
 
 Game::Game() : mWindow(new LWindow("Tic tac toe", 640, 480)), quit(false), data{0} {
-	auto	manager = mWindow->getManager();
-	//manager.load("cross", "res/cross.bmp");
-	//manager.load("circle", "res/circle.bmp");
+	mWindow->load("cross", "res/cross.bmp");
+	mWindow->load("circle", "res/circle.bmp");
 	turn = true;
 }
 
@@ -18,7 +17,8 @@ void	Game::run() {
 }
 
 void	Game::processEvents() {
-	auto	manager = mWindow->getManager();
+	auto	cross = mWindow->get("cross");
+	auto	circle = mWindow->get("circle");
 	SDL_Event	e;
 	while (SDL_PollEvent(&e)) {
 		if (e.type == SDL_QUIT)
@@ -39,14 +39,14 @@ void	Game::processEvents() {
 					break;
 				}
 			if (x < 3 && y < 3 && !data[x][y]) {
-				/*auto	tmp = std::unique_ptr<LSprite>(
-						new LSprite(turn?manager.get("circle"):manager.get("cross"),
+				auto	tmp = std::unique_ptr<LSprite>(
+						new LSprite(turn?*circle:*cross,
 							x * mWindow->w / 3 + mWindow->w / 6,
 							y * mWindow->h / 3 + mWindow->h / 6));
 				tmp->setCenter({tmp->w / 2, tmp->h / 2});
 				sprites.push_back(std::move(tmp));
 				data[x][y] = turn?1:2;
-				turn = 1 - turn;*/
+				turn = 1 - turn;
 			}
 		}
 		mWindow->handleEvent(e);

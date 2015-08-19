@@ -24,10 +24,8 @@ LTexture::LTexture(SDL_Renderer *ren, std::string path) : mRen(ren), mTexture(nu
 }
 
 LTexture::~LTexture() {
-	if (mTexture) {
+	if (mTexture)
 		SDL_DestroyTexture(mTexture);
-		mTexture = nullptr;
-	}
 }
 
 void	LTexture::render(int x, int y, SDL_Rect *clip, double angle,

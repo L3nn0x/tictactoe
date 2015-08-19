@@ -9,14 +9,17 @@
 class	LWindow {
 	public:
 		LWindow(std::string name, int w, int h);
+		LWindow(LWindow&) = delete;
 		~LWindow();
 
 		SDL_Renderer		*getRenderer();
-		LTextureManager&	getManager();
 
 		void	handleEvent(SDL_Event &e);
 		void	focus();
 		void	render();
+
+		void		load(std::string id, std::string filename);
+		LTexture*	get(std::string ig);
 
 		int	w;
 		int	h;
